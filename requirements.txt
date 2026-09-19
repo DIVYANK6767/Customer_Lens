@@ -1,3 +1,5 @@
-# Initial Core Dependencies (Foundation Stage)
+# CustomerLens Dependencies
 python-dotenv>=1.0.0
 pytest>=8.0.0
+pandas>=2.0.0
+numpy>=1.24.0
