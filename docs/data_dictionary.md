@@ -167,6 +167,19 @@ The dataset comprises eight core fields. Each field is formally specified below 
 
 ---
 
+#### 2.9 Derived Analytical Fields (Generated in Phase 5 Pipeline)
+
+In addition to the eight raw source fields, the cleaning pipeline engineers three standardized derived fields:
+- **`TransactionType` (`VARCHAR(20)` / `string`):** Deterministic classification of the transaction line item:
+  - `'Sale'`: Valid completed retail merchandise purchase ($\text{Quantity} > 0, \text{UnitPrice} > 0$, standard invoice).
+  - `'Cancellation'`: Customer returned or cancelled order (`InvoiceNo` starts with `'C'`).
+  - `'Adjustment'`: Non-commercial entries (`InvoiceNo` starts with `'A'`, e.g. bad debt) or warehouse inventory deductions ($\text{Quantity} < 0$ without `'C'`).
+  - `'Invalid'`: Records with $\text{Quantity} = 0$ or $\text{UnitPrice} \le 0$ not categorized above.
+- **`DescriptionMissing` (`BOOLEAN` / `bool`):** Explicit flag indicating whether the merchandise description was null or empty.
+- **`Revenue` (`NUMERIC(12, 2)` / `float`):** Monetary value of the line item, calculated as $\text{Quantity} \times \text{UnitPrice}$ rounded to 2 decimal places.
+
+---
+
 ### 3. Core Data Quality Scenarios & Treatment Rules
 
 ```
