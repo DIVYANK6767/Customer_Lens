@@ -10,10 +10,57 @@ The SQL analytics layer provides an enterprise-grade relational foundation for q
 
 ```text
 sql/
-├── schema.sql        # DDL definitions: analytics schema and customer_transactions table
-├── validation.sql    # Data audit queries and invariant validation scorecard
-└── README.md         # Architecture, usage guidelines, and workflow documentation
+├── schema.sql              # DDL definitions: analytics schema and customer_transactions table
+├── validation.sql          # Data audit queries and invariant validation scorecard
+├── exploration.sql         # Foundational exploration queries (12 baseline inquiries)
+├── customer_metrics.sql    # Customer-level metrics, window rankings, and concentration curves
+├── revenue_analysis.sql    # Revenue velocity, MoM growth (LAG), diurnal, and percentiles
+├── business_questions.sql  # 20 executive and commercial business questions answered via SQL
+└── README.md               # Architecture, catalog, execution guidelines, and documentation
 ```
+
+---
+
+## SQL Scripts Catalog
+
+### 1. `schema.sql` (Phase 7.1)
+- Establishes the `analytics` schema and `analytics.customer_transactions` table.
+- Defines robust relational types (`TEXT`, `TIMESTAMP`, `INTEGER`, `NUMERIC(12, 4)`, `NUMERIC(14, 2)`).
+- Applies check constraints safeguarding positive quantities, prices, and identified customer records.
+
+### 2. `validation.sql` (Phase 7.1)
+- Validates data fidelity immediately following `COPY` ingestion.
+- Asserts strict compliance against core dataset invariants (392,692 rows, 4,338 customers, 18,532 orders, £8,887,208.89 revenue).
+
+### 3. `exploration.sql` (Phase 7.2)
+- Contains 12 foundational exploratory SQL queries establishing baseline operational metrics.
+- Computes overall transaction rows, active customers, orders, revenue, physical units, unique SKUs, geographic footprint, and temporal horizons.
+- Provides customer, country, and monthly aggregated summaries.
+
+### 4. `customer_metrics.sql` (Phase 7.2)
+- **Section A: Customer Revenue & Lifetime Value:** Lifetime spend, order volume, total units, AOV, first/last purchase timestamps.
+- **Section B: Purchase Frequency Distribution:** Order frequency tiers, customer count shares, and revenue generation.
+- **Section C: Customer Ranking by Revenue:** Demonstrates `RANK()` and `DENSE_RANK()` window functions.
+- **Section D: Customer Revenue Contribution:** Windowed individual percentage share using `SUM() OVER ()`.
+- **Section E: Cumulative Revenue Contribution:** Cumulative Lorenz curve using `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`.
+- **Section F: Repeat vs. One-Time Customers:** Granular breakdown of 2,845 repeat buyers (65.58%) vs 1,493 one-time buyers (34.42%).
+- **Section G: Customer Inactivity Analysis:** Recency calculation using dynamic anchor `MAX(invoicedate) + INTERVAL '1 day'`.
+- **Section H: Top Customers by Revenue:** Top 10, top 20, and top 50 accounts with strict 1-to-1 customer grouping.
+
+### 5. `revenue_analysis.sql` (Phase 7.2)
+- **Section A: Monthly Sales Velocity:** 13-month time series tracking orders, active customers, units, gross revenue, and AOV.
+- **Section B: Month-over-Month Revenue Growth:** Employs `LAG()` window function to track monthly trajectory, absolute delta, and percentage change.
+- **Section C: Country Revenue Breakdown:** Destination market sales distribution, order counts, customer counts, and AOV.
+- **Section D: Country Revenue Ranking:** `RANK()` and `DENSE_RANK()` geographic market evaluation.
+- **Section E: Daily Revenue Time Series:** High-resolution daily sales trajectory tracking.
+- **Section F: Day-of-Week Operational Analysis:** Weekday purchasing rhythms using `EXTRACT(ISODOW ...)` and `TO_CHAR(..., 'FMDay')`.
+- **Section G: Hourly Diurnal Rhythms:** Hourly order patterns across the 24-hour cycle.
+- **Section H: Order Value Distribution & Percentiles:** Basket monetary spend percentiles using `PERCENTILE_CONT(0.25, 0.50, 0.75, 0.90, 0.95, 0.99)`.
+
+### 6. `business_questions.sql` (Phase 7.2)
+- Answers 20 dedicated executive and commercial business questions (Q1 through Q20).
+- Employs CTEs, window functions, percentile benchmarks, and cohort breakdowns.
+- Solves key commercial problems including Pareto threshold identification (Q11: rank 1,130 accounts generate ~80% of revenue), churn/inactivity detection (Q12), wholesale customer identification (Q17), and revenue decile concentration (Q20).
 
 ---
 
@@ -64,42 +111,26 @@ POSTGRES_USER=postgres
 POSTGRES_PASSWORD=your_password_here
 ```
 
-### 2. Creating the Schema (`schema.sql`)
-You can initialize the schema using `psql`:
-```bash
-psql -h localhost -U postgres -d customer_lens -f sql/schema.sql
-```
-Alternatively, the Python ingestion script automatically applies `schema.sql` if the schema is not yet initialized.
-
-### 3. Loading the Data (`src/load_to_postgres.py`)
+### 2. Loading the Data (`src/load_to_postgres.py`)
 Execute the automated Python ingestion script:
 ```bash
 python -m src.load_to_postgres
 ```
-**Idempotency Strategy:** The loader executes `TRUNCATE TABLE` followed by streaming `COPY` inside an atomic transaction block. Running the script multiple times will never duplicate rows or create partial data states.
 
-### 4. Validating Invariants (`validation.sql`)
-Execute the validation queries and inspection scorecard via `psql`:
+### 3. Running SQL Queries via `psql`
+Execute any analytical script against the database:
 ```bash
-psql -h localhost -U postgres -d customer_lens -f sql/validation.sql
+psql -h localhost -U postgres -d customer_lens -f sql/exploration.sql
+psql -h localhost -U postgres -d customer_lens -f sql/customer_metrics.sql
+psql -h localhost -U postgres -d customer_lens -f sql/revenue_analysis.sql
+psql -h localhost -U postgres -d customer_lens -f sql/business_questions.sql
 ```
 
-Expected validation baselines:
-- **Total Rows:** `392,692`
-- **Active Customers:** `4,338`
-- **Completed Orders:** `18,532`
-- **Total Revenue:** `£8,887,208.89`
-- **Missing CustomerID:** `0`
-- **TransactionType:** `100% Sale`
-
----
-
-## Why PostgreSQL?
-
-1. **Analytical Query Power:** Native support for window functions (`ROW_NUMBER()`, `RANK()`, `NTILE()`), Common Table Expressions (CTEs), and complex multi-level aggregations required for cohort and Pareto analysis.
-2. **Reliability & ACID Compliance:** Enforces data integrity through foreign keys, check constraints, and atomic transactions.
-3. **Enterprise Standard:** Reflects realistic corporate data engineering workflows where data warehouses/relational databases serve downstream analytics rather than flat CSV files.
-4. **Tool Agnostic Integration:** Directly integrates with BI tools (e.g., Power BI), web applications (e.g., Streamlit), and machine learning pipelines.
+### 4. Running Automated Analytical Tests
+Execute the SQL analytical test suite verifying all 12 analytical invariants:
+```bash
+python -m pytest tests/test_sql_analytics.py -v
+```
 
 ---
 
