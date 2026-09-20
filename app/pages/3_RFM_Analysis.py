@@ -12,10 +12,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st  # type: ignore
 
-from app.components.filters import render_sidebar_header, render_sidebar_footer
-from app.components.charts import plot_rfm_distributions
-from app.data_loader import load_rfm_metrics
-from app.utils import format_currency, format_number
+from components.filters import render_sidebar_header, render_sidebar_footer
+from components.charts import plot_rfm_distributions
+from data_loader import load_rfm_metrics
+from utils import format_currency, format_number
 
 st.set_page_config(page_title="RFM Analysis — CustomerLens", page_icon="📈", layout="wide")
 

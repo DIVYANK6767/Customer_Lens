@@ -9,10 +9,10 @@ from pathlib import Path
 import streamlit as st  # type: ignore
 import pandas as pd
 
-from app.components.filters import render_sidebar_header, render_sidebar_footer, render_customer_filters
-from app.components.metrics import render_customer_kpis
-from app.data_loader import load_business_segments
-from app.utils import filter_customers, format_currency, format_number, generate_customer_interpretation
+from components.filters import render_sidebar_header, render_sidebar_footer, render_customer_filters
+from components.metrics import render_customer_kpis
+from data_loader import load_business_segments
+from utils import filter_customers, format_currency, format_number, generate_customer_interpretation
 
 st.set_page_config(page_title="Customer Explorer — CustomerLens", page_icon="🔎", layout="wide")
 

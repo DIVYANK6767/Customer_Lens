@@ -9,21 +9,21 @@ from pathlib import Path
 import streamlit as st  # type: ignore
 import pandas as pd
 
-from app.components.filters import render_sidebar_header, render_sidebar_footer, render_customer_filters
-from app.components.metrics import render_executive_kpis
-from app.components.charts import (
+from components.filters import render_sidebar_header, render_sidebar_footer, render_customer_filters
+from components.metrics import render_executive_kpis
+from components.charts import (
     plot_revenue_by_month,
     plot_customer_vs_revenue_share,
     plot_revenue_by_country,
     plot_repeat_vs_onetime,
     plot_revenue_concentration,
 )
-from app.data_loader import (
+from data_loader import (
     load_customer_transactions,
     load_business_segments,
     load_segment_summary,
 )
-from app.utils import calculate_executive_kpis, filter_customers, format_currency, format_number, format_percentage
+from utils import calculate_executive_kpis, filter_customers, format_currency, format_number, format_percentage
 
 st.set_page_config(page_title="Executive Overview — CustomerLens", page_icon="📊", layout="wide")
 

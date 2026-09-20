@@ -8,9 +8,9 @@ from pathlib import Path
 import streamlit as st  # type: ignore
 import pandas as pd
 
-from app.components.filters import render_sidebar_header, render_sidebar_footer
-from app.data_loader import load_segment_summary
-from app.utils import format_currency, format_number
+from components.filters import render_sidebar_header, render_sidebar_footer
+from data_loader import load_segment_summary
+from utils import format_currency, format_number
 
 # Configure page layout
 st.set_page_config(

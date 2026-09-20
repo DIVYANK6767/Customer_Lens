@@ -8,7 +8,10 @@ from typing import Dict, Any, Optional
 import pandas as pd
 import streamlit as st  # type: ignore
 
-from app.utils import format_currency, format_number, format_percentage
+try:
+    from utils import format_currency, format_number, format_percentage
+except ModuleNotFoundError:
+    from app.utils import format_currency, format_number, format_percentage
 
 
 def render_executive_kpis(kpi_data: Dict[str, Any]) -> None:

@@ -9,9 +9,9 @@ from pathlib import Path
 import streamlit as st  # type: ignore
 import pandas as pd
 
-from app.components.filters import render_sidebar_header, render_sidebar_footer
-from app.data_loader import load_marketing_opportunities, load_segment_summary
-from app.utils import format_currency, format_number, format_percentage
+from components.filters import render_sidebar_header, render_sidebar_footer
+from data_loader import load_marketing_opportunities, load_segment_summary
+from utils import format_currency, format_number, format_percentage
 
 st.set_page_config(page_title="Marketing Insights — CustomerLens", page_icon="💡", layout="wide")
 

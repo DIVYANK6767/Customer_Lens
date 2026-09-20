@@ -11,7 +11,10 @@ import logging
 import pandas as pd
 import streamlit as st  # type: ignore
 
-from app.utils import validate_required_columns
+try:
+    from utils import validate_required_columns
+except ModuleNotFoundError:
+    from app.utils import validate_required_columns
 
 logger = logging.getLogger(__name__)
 
