@@ -1,0 +1,135 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "table_marketing_tactics_detail",
+  "position": {
+    "x": 970,
+    "y": 655,
+    "z": 3100,
+    "width": 920,
+    "height": 410,
+    "tabOrder": 3100
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Ref_MarketingOpportunities"
+                    }
+                  },
+                  "Property": "business_segment"
+                }
+              },
+              "queryRef": "Ref_MarketingOpportunities.business_segment",
+              "nativeQueryRef": "Business Segment"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Ref_MarketingOpportunities"
+                    }
+                  },
+                  "Property": "action_category"
+                }
+              },
+              "queryRef": "Ref_MarketingOpportunities.action_category",
+              "nativeQueryRef": "Action Category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Ref_MarketingOpportunities"
+                    }
+                  },
+                  "Property": "recommended_action"
+                }
+              },
+              "queryRef": "Ref_MarketingOpportunities.recommended_action",
+              "nativeQueryRef": "Recommended Tactic"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Ref_MarketingOpportunities"
+                    }
+                  },
+                  "Property": "measurement_metric"
+                }
+              },
+              "queryRef": "Ref_MarketingOpportunities.measurement_metric",
+              "nativeQueryRef": "Proposed KPI"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Ref_MarketingOpportunities"
+                    }
+                  },
+                  "Property": "caveat"
+                }
+              },
+              "queryRef": "Ref_MarketingOpportunities.caveat",
+              "nativeQueryRef": "Risk / Caveat"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Marketing Opportunity Detail (Recommended Tactics, Proposed KPIs & Risk Caveats)'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Hypothesized operational tactics, proposed evaluation metrics, and implementation caveats'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

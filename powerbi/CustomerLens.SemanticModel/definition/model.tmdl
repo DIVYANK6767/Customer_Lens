@@ -1,0 +1,22 @@
+model Model
+	culture: en-IN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
+
+ref table Fact_ClusteringDiagnostics
+ref table Dim_Segment
+ref table Ref_MarketingOpportunities
+ref table Dim_Customer
+ref table Fact_Transactions
+ref table _Measures
+
+ref cultureInfo en-IN
+

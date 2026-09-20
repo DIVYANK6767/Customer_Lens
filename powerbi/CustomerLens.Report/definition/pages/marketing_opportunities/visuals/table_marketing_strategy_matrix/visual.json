@@ -1,0 +1,121 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "table_marketing_strategy_matrix",
+  "position": {
+    "x": 30,
+    "y": 655,
+    "z": 3000,
+    "width": 920,
+    "height": 410,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Ref_MarketingOpportunities"
+                    }
+                  },
+                  "Property": "business_segment"
+                }
+              },
+              "queryRef": "Ref_MarketingOpportunities.business_segment",
+              "nativeQueryRef": "Business Segment"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Ref_MarketingOpportunities"
+                    }
+                  },
+                  "Property": "action_category"
+                }
+              },
+              "queryRef": "Ref_MarketingOpportunities.action_category",
+              "nativeQueryRef": "Action Category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Ref_MarketingOpportunities"
+                    }
+                  },
+                  "Property": "primary_characteristic"
+                }
+              },
+              "queryRef": "Ref_MarketingOpportunities.primary_characteristic",
+              "nativeQueryRef": "Observed Behavior / Profile"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Ref_MarketingOpportunities"
+                    }
+                  },
+                  "Property": "business_opportunity"
+                }
+              },
+              "queryRef": "Ref_MarketingOpportunities.business_opportunity",
+              "nativeQueryRef": "Business Opportunity"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Marketing Strategy Matrix (Observed Behaviors & Opportunity Hypotheses)'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Strategic orientation and business opportunity hypotheses derived from segment characteristics'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

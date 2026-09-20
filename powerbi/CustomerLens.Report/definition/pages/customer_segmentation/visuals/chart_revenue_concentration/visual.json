@@ -1,0 +1,77 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "chart_revenue_concentration",
+  "position": {
+    "x": 1290,
+    "y": 235,
+    "z": 2200,
+    "width": 600,
+    "height": 410,
+    "tabOrder": 2200
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Segment"
+                    }
+                  },
+                  "Property": "business_segment"
+                }
+              },
+              "queryRef": "Dim_Segment.business_segment",
+              "nativeQueryRef": "Business Segment"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Revenue Concentration Multiplier"
+                }
+              },
+              "queryRef": "_Measures.Revenue Concentration Multiplier",
+              "nativeQueryRef": "Revenue Concentration Multiplier"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Revenue Concentration Index (Revenue Share % / Customer Share %)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

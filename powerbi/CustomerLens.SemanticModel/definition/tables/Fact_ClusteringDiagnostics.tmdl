@@ -1,0 +1,47 @@
+table Fact_ClusteringDiagnostics
+	lineageTag: 6f7f633e-8706-4297-86e6-36e339865217
+
+	column k
+		dataType: int64
+		lineageTag: c49849e0-e1a6-4968-9375-6c479fe211cd
+		sourceColumn: k
+
+	column inertia
+		dataType: double
+		lineageTag: 81f8ed85-b194-4888-929b-8e5a13df53db
+		sourceColumn: inertia
+
+	column silhouette_score
+		dataType: double
+		lineageTag: d1656efa-28ea-4fe9-a5b6-418aa99cd825
+		sourceColumn: silhouette_score
+
+	column calinski_harabasz
+		dataType: double
+		lineageTag: 93d07ad4-1bae-4d21-93ca-585d6af0471f
+		sourceColumn: calinski_harabasz
+
+	column davies_bouldin
+		dataType: double
+		lineageTag: 9c4cb984-f543-4cf8-9329-5ee168d999bb
+		sourceColumn: davies_bouldin
+
+	column cluster_count
+		dataType: int64
+		lineageTag: 0eb7f93f-5241-41cc-b45c-1f35314423ed
+		sourceColumn: cluster_count
+
+	column min_cluster_size
+		dataType: int64
+		lineageTag: b96cd911-8930-4ed6-a3c6-e7f68064d4ae
+		sourceColumn: min_cluster_size
+
+	column max_cluster_size
+		dataType: int64
+		lineageTag: 8b8fecb9-f932-4c2b-aa72-b8f596095846
+		sourceColumn: max_cluster_size
+
+	partition Fact_ClusteringDiagnostics = m
+		mode: import
+		source = let Source = Csv.Document(File.Contents("C:/Users/divya/OneDrive/Desktop/Customer_Lens/data/processed/clustering_metrics.csv"),[Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]), #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]), #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"k", Int64.Type}, {"inertia", type number}, {"silhouette_score", type number}, {"calinski_harabasz", type number}, {"davies_bouldin", type number}, {"cluster_count", Int64.Type}, {"min_cluster_size", Int64.Type}, {"max_cluster_size", Int64.Type}}) in #"Changed Type"
+

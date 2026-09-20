@@ -1,0 +1,14 @@
+relationship Fact_Transactions_CustomerID_Dim_Customer_customerid
+	fromColumn: Fact_Transactions.CustomerID
+	toColumn: Dim_Customer.customerid
+
+relationship Dim_Customer_cluster_id_Dim_Segment_cluster_id
+	fromColumn: Dim_Customer.cluster_id
+	toColumn: Dim_Segment.cluster_id
+
+relationship Ref_MarketingOpportunities_cluster_id_Dim_Segment_cluster_id
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Ref_MarketingOpportunities.cluster_id
+	toColumn: Dim_Segment.cluster_id
+

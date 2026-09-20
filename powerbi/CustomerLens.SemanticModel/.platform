@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "CustomerLens"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0cbdda1e-5485-4834-80b5-ec611fb9959d"
+  }
+}

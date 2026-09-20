@@ -1,0 +1,109 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "chart_rfm_comparison",
+  "position": {
+    "x": 1230,
+    "y": 660,
+    "z": 7100,
+    "width": 660,
+    "height": 400,
+    "tabOrder": 7100
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Segment"
+                    }
+                  },
+                  "Property": "business_segment"
+                }
+              },
+              "queryRef": "Dim_Segment.business_segment",
+              "nativeQueryRef": "Business Segment"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Median Monetary"
+                }
+              },
+              "queryRef": "_Measures.Median Monetary",
+              "nativeQueryRef": "Median Spend (£)"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Median Recency"
+                }
+              },
+              "queryRef": "_Measures.Median Recency",
+              "nativeQueryRef": "Median Recency (d)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Median Frequency"
+                }
+              },
+              "queryRef": "_Measures.Median Frequency",
+              "nativeQueryRef": "Median Orders"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'RFM Profile Benchmark: Median Spend (£) Across Personas'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "chart_segment_behavioral_profile",
+  "position": {
+    "x": 1380,
+    "y": 230,
+    "z": 2200,
+    "width": 510,
+    "height": 410,
+    "tabOrder": 2200
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Segment"
+                    }
+                  },
+                  "Property": "business_segment"
+                }
+              },
+              "queryRef": "Dim_Segment.business_segment",
+              "nativeQueryRef": "Business Segment"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Median Monetary"
+                }
+              },
+              "queryRef": "_Measures.Median Monetary",
+              "nativeQueryRef": "Median Spend (£)"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Median Recency"
+                }
+              },
+              "queryRef": "_Measures.Median Recency",
+              "nativeQueryRef": "Median Recency (d)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Median Frequency"
+                }
+              },
+              "queryRef": "_Measures.Median Frequency",
+              "nativeQueryRef": "Median Orders"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Observed Behavioral Profile (Median Spend & RFM Baselines)'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Median monetary spend (£) with median recency (days) and order frequency in tooltips'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

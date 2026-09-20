@@ -1,0 +1,56 @@
+table Fact_Transactions
+	lineageTag: 39f32fb2-7a86-4e8f-b573-c729975f67d2
+
+	column InvoiceNo
+		dataType: string
+		lineageTag: 382eb475-c6ce-4381-9bd1-1716140ca710
+		sourceColumn: InvoiceNo
+
+	column StockCode
+		dataType: string
+		lineageTag: f4345e63-cc0f-4f98-9e43-482ce92da15a
+		sourceColumn: StockCode
+
+	column Description
+		dataType: string
+		lineageTag: e45e47d0-443a-4175-b054-a7d9994405bc
+		sourceColumn: Description
+
+	column Quantity
+		dataType: int64
+		lineageTag: 04725198-b12d-427d-a88e-db667d0b3487
+		sourceColumn: Quantity
+
+	column InvoiceDate
+		dataType: dateTime
+		lineageTag: 2e620745-f73f-4300-8c06-65a581e9403b
+		sourceColumn: InvoiceDate
+
+	column UnitPrice
+		dataType: double
+		formatString: £#,##0.00
+		lineageTag: babcc46a-970d-4062-a9ad-b70eb34ee457
+		sourceColumn: UnitPrice
+
+	column CustomerID
+		dataType: int64
+		isHidden
+		lineageTag: 2f4c2d0b-3b45-45f3-bac5-5923c8d1f712
+		sourceColumn: CustomerID
+
+	column Country
+		dataType: string
+		lineageTag: ca70510f-9498-41f0-9ae0-5a4968797905
+		dataCategory: Country
+		sourceColumn: Country
+
+	column Revenue
+		dataType: double
+		formatString: £#,##0.00
+		lineageTag: a7316dfd-3f58-4a52-9204-498eebbb11b2
+		sourceColumn: Revenue
+
+	partition Fact_Transactions = m
+		mode: import
+		source = let Source = Csv.Document(File.Contents("C:/Users/divya/OneDrive/Desktop/Customer_Lens/data/processed/customer_transactions.csv"),[Delimiter=",", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.Csv]), #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]), #"Removed Columns" = Table.RemoveColumns(#"Promoted Headers",{"TransactionType", "DescriptionMissing"}), #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"InvoiceNo", type text}, {"StockCode", type text}, {"Description", type text}, {"Quantity", Int64.Type}, {"InvoiceDate", type datetime}, {"UnitPrice", type number}, {"CustomerID", Int64.Type}, {"Country", type text}, {"Revenue", type number}}) in #"Changed Type"
+

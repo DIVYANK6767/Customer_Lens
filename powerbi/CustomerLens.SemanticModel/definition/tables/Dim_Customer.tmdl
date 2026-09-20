@@ -1,0 +1,103 @@
+table Dim_Customer
+	lineageTag: cc343531-cd8a-4778-88df-09329eaff632
+
+	column customerid
+		dataType: int64
+		isKey
+		isNullable: false
+		lineageTag: 5cb071b7-75bf-4a5e-ad86-ace7d1b8cd01
+		sourceColumn: customerid
+
+	column recency
+		dataType: int64
+		lineageTag: 93f9c057-de5a-4afa-a62b-c3c7799f813a
+		sourceColumn: recency
+
+	column frequency
+		dataType: int64
+		lineageTag: 6b51c18c-4b07-4d5e-9720-dbfbfe13eaf2
+		sourceColumn: frequency
+
+	column monetary
+		dataType: double
+		formatString: £#,##0.00
+		lineageTag: 36d032e2-10bc-4717-adac-ace4ac798877
+		sourceColumn: monetary
+
+	column R_score
+		dataType: int64
+		lineageTag: cf6d4d16-f945-4842-8c27-3a335238df94
+		sourceColumn: R_score
+
+	column F_score
+		dataType: int64
+		lineageTag: 151d1e1b-b3b3-401a-ae93-33bd42de5e52
+		sourceColumn: F_score
+
+	column M_score
+		dataType: int64
+		lineageTag: 3056c3ad-a4d4-4432-ab37-b7e2b5bc0886
+		sourceColumn: M_score
+
+	column RFM_score
+		dataType: int64
+		lineageTag: b0df0e59-e3ec-44ba-8c59-4d16a791c481
+		sourceColumn: RFM_score
+
+	column segment
+		dataType: string
+		lineageTag: f68d85f8-bb1d-48a8-9ec1-41fbcd1be6dd
+		sourceColumn: segment
+
+	column cluster_id
+		dataType: int64
+		isHidden
+		lineageTag: c667789b-e932-4f10-a465-f59668360aba
+		sourceColumn: cluster_id
+
+	column country
+		dataType: string
+		lineageTag: 6267a5e8-ed6c-4b2b-a34c-e768c694918b
+		dataCategory: Country
+		sourceColumn: country
+
+	column first_purchase_date
+		dataType: dateTime
+		lineageTag: 73013d31-eea5-4e4f-a5ff-2086c934c654
+		sourceColumn: first_purchase_date
+
+	column last_purchase_date
+		dataType: dateTime
+		lineageTag: 7b5ee173-037d-44d2-b070-18ed57673ed6
+		sourceColumn: last_purchase_date
+
+	column PCA1
+		dataType: double
+		lineageTag: 0b046e88-fbd3-4792-983b-83375a362de2
+		sourceColumn: PCA1
+
+	column PCA2
+		dataType: double
+		lineageTag: b5d3937e-e0d0-4b53-b669-2189dca30200
+		sourceColumn: PCA2
+
+	column business_segment
+		dataType: string
+		lineageTag: 14f61bbe-badd-4380-8074-5c02f167460c
+		sourceColumn: business_segment
+		sortByColumn: cluster_id
+
+	column action_category
+		dataType: string
+		lineageTag: 2094185a-759c-4d43-b253-992b6083fc79
+		sourceColumn: action_category
+
+	column segment_description
+		dataType: string
+		lineageTag: 3ef5f34c-62f1-41c3-bcf3-824a891ff53a
+		sourceColumn: segment_description
+
+	partition Dim_Customer = m
+		mode: import
+		source = let Source = Csv.Document(File.Contents("C:/Users/divya/OneDrive/Desktop/Customer_Lens/data/processed/business_segments.csv"),[Delimiter=",", Columns=18, Encoding=65001, QuoteStyle=QuoteStyle.Csv]), #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]), #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"customerid", Int64.Type}, {"recency", Int64.Type}, {"frequency", Int64.Type}, {"monetary", type number}, {"R_score", Int64.Type}, {"F_score", Int64.Type}, {"M_score", Int64.Type}, {"RFM_score", Int64.Type}, {"segment", type text}, {"cluster_id", Int64.Type}, {"country", type text}, {"first_purchase_date", type datetime}, {"last_purchase_date", type datetime}, {"PCA1", type number}, {"PCA2", type number}, {"business_segment", type text}, {"action_category", type text}, {"segment_description", type text}}) in #"Changed Type"
+

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "slicer_country",
+  "position": {
+    "x": 1160,
+    "y": 20,
+    "z": 300,
+    "width": 350,
+    "height": 70,
+    "tabOrder": 300
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Fact_Transactions"
+                    }
+                  },
+                  "Property": "Country"
+                }
+              },
+              "queryRef": "Fact_Transactions.Country",
+              "nativeQueryRef": "Country"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "table_customer_rfm_detail",
+  "position": {
+    "x": 975,
+    "y": 655,
+    "z": 3300,
+    "width": 915,
+    "height": 410,
+    "tabOrder": 3300
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Customer"
+                    }
+                  },
+                  "Property": "customerid"
+                }
+              },
+              "queryRef": "Dim_Customer.customerid",
+              "nativeQueryRef": "Customer ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Customer"
+                    }
+                  },
+                  "Property": "country"
+                }
+              },
+              "queryRef": "Dim_Customer.country",
+              "nativeQueryRef": "Country"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Customer"
+                    }
+                  },
+                  "Property": "business_segment"
+                }
+              },
+              "queryRef": "Dim_Customer.business_segment",
+              "nativeQueryRef": "Business Segment"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Customer"
+                    }
+                  },
+                  "Property": "recency"
+                }
+              },
+              "queryRef": "Dim_Customer.recency",
+              "nativeQueryRef": "Recency (d)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Customer"
+                    }
+                  },
+                  "Property": "frequency"
+                }
+              },
+              "queryRef": "Dim_Customer.frequency",
+              "nativeQueryRef": "Frequency"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Customer"
+                    }
+                  },
+                  "Property": "monetary"
+                }
+              },
+              "queryRef": "Dim_Customer.monetary",
+              "nativeQueryRef": "Spend (£)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Customer"
+                    }
+                  },
+                  "Property": "RFM_score"
+                }
+              },
+              "queryRef": "Dim_Customer.RFM_score",
+              "nativeQueryRef": "RFM Score"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Customer"
+                    }
+                  },
+                  "Property": "segment"
+                }
+              },
+              "queryRef": "Dim_Customer.segment",
+              "nativeQueryRef": "RFM Segment"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Customer RFM Behavioral Records (Observed Transaction History)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

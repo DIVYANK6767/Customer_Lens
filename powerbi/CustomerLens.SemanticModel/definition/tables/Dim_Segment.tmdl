@@ -1,0 +1,97 @@
+table Dim_Segment
+	lineageTag: e6cb34fc-73c5-4c4c-811b-a83065f250fb
+
+	column cluster_id
+		dataType: int64
+		lineageTag: 8d0c9ad6-709f-4b46-ba82-2ce35dc701f1
+		sourceColumn: cluster_id
+
+	column business_segment
+		dataType: string
+		lineageTag: b490b6c5-1f28-437a-b4a0-09a110ae70cc
+		sourceColumn: business_segment
+		sortByColumn: cluster_id
+
+	column action_category
+		dataType: string
+		lineageTag: bee6881f-6365-4d0c-8154-ef73422d6994
+		sourceColumn: action_category
+
+	column customer_count
+		dataType: int64
+		lineageTag: b1a29110-cb27-4c69-836f-1accc09769b4
+		sourceColumn: customer_count
+
+	column customer_percentage
+		dataType: double
+		lineageTag: b3cd56d8-3280-42e8-9827-8554f884ca0e
+		sourceColumn: customer_percentage
+
+	column total_revenue
+		dataType: double
+		formatString: £#,##0.00
+		lineageTag: 7436acbe-8556-44fc-8639-a1f2edb3dfec
+		sourceColumn: total_revenue
+
+	column revenue_percentage
+		dataType: double
+		lineageTag: 055e14f3-f20b-452b-b99a-a77c7c06425e
+		sourceColumn: revenue_percentage
+
+	column average_recency
+		dataType: double
+		lineageTag: 87b27c3a-4c93-452e-9230-55702c93eeec
+		sourceColumn: average_recency
+
+	column median_recency
+		dataType: double
+		lineageTag: ae92b1ba-2a63-49f3-8460-9cd3a17fdfb3
+		sourceColumn: median_recency
+
+	column average_frequency
+		dataType: double
+		lineageTag: 82b001f2-9110-43f7-88a4-58f0a7c93c70
+		sourceColumn: average_frequency
+
+	column median_frequency
+		dataType: double
+		lineageTag: 2acb71b7-7f49-4ec5-9894-e7fcf8261ba3
+		sourceColumn: median_frequency
+
+	column average_monetary
+		dataType: double
+		formatString: £#,##0.00
+		lineageTag: e346d23b-2927-4b0d-a817-caf77523daeb
+		sourceColumn: average_monetary
+
+	column median_monetary
+		dataType: double
+		formatString: £#,##0.00
+		lineageTag: 576a75b3-8a2a-4ab1-9ed1-fc4d9bdd21e9
+		sourceColumn: median_monetary
+
+	column average_orders
+		dataType: double
+		lineageTag: 4942f47e-b84a-4dc4-b271-130e98013f7b
+		sourceColumn: average_orders
+
+	column average_revenue_per_customer
+		dataType: double
+		formatString: £#,##0.00
+		lineageTag: c7a1680f-b22c-433f-937a-bcdf8d32948e
+		sourceColumn: average_revenue_per_customer
+
+	column primary_characteristic
+		dataType: string
+		lineageTag: 5abd6881-0fcf-41fe-847f-7ea6b174b2a9
+		sourceColumn: primary_characteristic
+
+	column business_opportunity
+		dataType: string
+		lineageTag: f9f30f3e-093b-426b-8c9a-2e0bea153fb9
+		sourceColumn: business_opportunity
+
+	partition Dim_Segment = m
+		mode: import
+		source = let Source = Csv.Document(File.Contents("C:/Users/divya/OneDrive/Desktop/Customer_Lens/data/processed/segment_summary.csv"),[Delimiter=",", Columns=17, Encoding=65001, QuoteStyle=QuoteStyle.Csv]), #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]), #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"cluster_id", Int64.Type}, {"business_segment", type text}, {"action_category", type text}, {"customer_count", Int64.Type}, {"customer_percentage", type number}, {"total_revenue", type number}, {"revenue_percentage", type number}, {"average_recency", type number}, {"median_recency", type number}, {"average_frequency", type number}, {"median_frequency", type number}, {"average_monetary", type number}, {"median_monetary", type number}, {"average_orders", type number}, {"average_revenue_per_customer", type number}, {"primary_characteristic", type text}, {"business_opportunity", type text}}) in #"Changed Type"
+
