@@ -1,0 +1,5 @@
+cluster_id,customer_count,customer_percentage,total_revenue,revenue_percentage,average_recency,median_recency,average_frequency,median_frequency,average_monetary,median_monetary,average_orders,average_revenue_per_customer
+0,834,19.23,465608.17,5.24,17.6,17.0,2.19,2.0,558.28,481.03,2.19,558.28
+1,1618,37.3,547770.0,6.16,181.4,174.5,1.31,1.0,338.55,293.78,1.31,338.55
+2,1170,26.97,2092321.7,23.54,72.1,57.0,4.06,4.0,1788.31,1340.08,4.06,1788.31
+3,716,16.51,5781509.02,65.05,12.2,8.0,13.72,10.0,8074.73,3730.61,13.72,8074.73

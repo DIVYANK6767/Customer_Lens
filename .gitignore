@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyo
 
 # Virtual Environments
 .venv/
@@ -15,6 +16,10 @@ venv.bak/
 .env
 .env.*
 !.env.example
+*.pem
+*.key
+secrets.toml
+.streamlit/secrets.toml
 
 # Testing & Coverage
 .pytest_cache/
@@ -25,13 +30,22 @@ htmlcov/
 coverage.xml
 *.cover
 *.py,cover
+.mypy_cache/
+.ruff_cache/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 */.ipynb_checkpoints/*
 
+# Python packaging & build artifacts
+build/
+dist/
+*.egg-info/
+
 # IDE and Editor configurations
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 .idea/
 *.swp
 *.swo
@@ -56,14 +70,34 @@ logs/
 *.tmp
 *.temp
 *.bak
+scratch/
+tmp/
+temp/
 
-# Data files (keep raw & processed directories tracked via README.md, ignore data payloads)
+# Database & local sqlite artifacts
+*.db
+*.sqlite
+*.sqlite3
+
+# Power BI temporary files, lock files, and local developer cache
+*.tmp.pbix
+**/.pbi/
+
+# Data files policy
+# 1. Raw dataset: strictly ignored (large 45 MB source file)
 data/raw/*
 !data/raw/README.md
 !data/raw/.gitkeep
-data/processed/*
-!data/processed/README.md
-!data/processed/.gitkeep
 
-# Power BI temporary files
-*.tmp.pbix
+# 2. Processed datasets: ignore heavy ETL artifacts; whitelist datasets required by Streamlit
+data/processed/*
+!data/processed/.gitkeep
+!data/processed/customer_transactions.csv
+!data/processed/business_segments.csv
+!data/processed/segment_summary.csv
+!data/processed/clustering_metrics.csv
+!data/processed/cluster_profiles.csv
+!data/processed/rfm_customer_metrics.csv
+!data/processed/marketing_opportunities.csv
+!data/processed/customer_clusters.csv
+
