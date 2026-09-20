@@ -418,8 +418,9 @@ tests/test_streamlit_data.py ......................                      [100%]
 Customer_Lens/
 ├── .github/
 │   └── workflows/
-│       └── README.md              # CI/CD workflow architecture
+│       └── ci.yml                 # GitHub Actions automated test workflow
 ├── app/                           # Streamlit multi-page application
+│   ├── __init__.py                # App package initialization
 │   ├── Home.py                    # Application landing page
 │   ├── components/                # Modular UI widgets, cards, and charts
 │   ├── data_loader.py             # Streamlit caching and data ingestion
@@ -431,18 +432,17 @@ Customer_Lens/
 │       ├── 4_Marketing_Insights.py
 │       └── 5_Customer_Explorer.py
 ├── data/
-│   ├── raw/                       # Raw source dataset (Online_Retail.csv)
-│   └── processed/                 # Deterministic analytical outputs
-│       ├── clean_transactions.csv
-│       ├── customer_transactions.csv
-│       ├── cleaning_report.csv
-│       ├── rfm_customer_metrics.csv
-│       ├── customer_clusters.csv
+│   ├── raw/                       # Raw data documentation & instructions
+│   │   └── README.md
+│   └── processed/                 # Deterministic analytical outputs (8 tracked CSVs)
+│       ├── business_segments.csv
 │       ├── cluster_profiles.csv
 │       ├── clustering_metrics.csv
-│       ├── business_segments.csv
-│       ├── segment_summary.csv
-│       └── marketing_opportunities.csv
+│       ├── customer_clusters.csv
+│       ├── customer_transactions.csv
+│       ├── marketing_opportunities.csv
+│       ├── rfm_customer_metrics.csv
+│       └── segment_summary.csv
 ├── docs/                          # Comprehensive technical documentation
 │   ├── PRD.md
 │   ├── architecture.md
@@ -458,11 +458,13 @@ Customer_Lens/
 │   ├── sql_analytics.md
 │   └── streamlit_app.md
 ├── notebooks/                     # Interactive Jupyter analytical notebooks
+│   ├── README.md                  # Notebook workflow & execution index
 │   ├── 03_eda.ipynb
 │   ├── 04_rfm_analysis.ipynb
 │   ├── 05_customer_segmentation.ipynb
 │   └── 06_business_insights.ipynb
 ├── powerbi/                       # Enterprise-style Power BI analytical deliverables
+│   ├── README.md                  # Power BI architecture & setup guide
 │   ├── CustomerLens.pbip          # Power BI project file (PBIR format)
 │   ├── CustomerLens.pbix          # Power BI compiled report package
 │   ├── CustomerLens.Report/       # Visual container definitions & layouts
@@ -471,6 +473,7 @@ Customer_Lens/
 │   ├── data_dictionary.md         # Semantic model field documentation
 │   └── dax_measures.md            # Verified DAX measure formulas
 ├── sql/                           # Relational PostgreSQL analytics layer
+│   ├── README.md                  # SQL layer execution guide
 │   ├── schema.sql                 # DDL definitions & check constraints
 │   ├── validation.sql             # Post-load invariant audit queries
 │   ├── exploration.sql            # Foundational exploration queries
@@ -479,6 +482,7 @@ Customer_Lens/
 │   ├── rfm.sql                    # SQL-based RFM scoring logic
 │   └── business_questions.sql     # 20 commercial business query solutions
 ├── src/                           # Reusable Python analytical modules
+│   ├── __init__.py                # Package initialization
 │   ├── data_loader.py             # CSV loading & typing
 │   ├── cleaning.py                # Deterministic cleaning pipeline
 │   ├── database.py                # PostgreSQL connection management
@@ -499,11 +503,15 @@ Customer_Lens/
 │   ├── test_segmentation.py
 │   ├── test_sql_analytics.py
 │   └── test_streamlit_data.py
+├── .env.example                   # Environment variable template
+├── .gitignore                     # Git tracking exclusions
 ├── pytest.ini                     # Test configuration
 ├── requirements.txt               # Pinned Python package dependencies
 ├── LICENSE                        # MIT License
 └── README.md                      # Project master documentation
 ```
+
+> **Note on Data Files:** Large raw datasets (`data/raw/Online_Retail.csv`, 45 MB) and intermediate ETL audit artifacts (`data/processed/clean_transactions.csv`, 53 MB; `data/processed/cleaning_report.csv`) are intentionally excluded from version control via `.gitignore` to maintain a lightweight repository. They can be reproduced locally at any time by executing the pipeline (`src/cleaning.py`). The 8 processed analytical datasets required by the Streamlit application and automated test suite are tracked directly in Git.
 
 ---
 
