@@ -11,6 +11,12 @@ An end-to-end portfolio project combining **deterministic data cleaning**, **rel
 
 CustomerLens transforms **541,909 raw e-commerce transaction records** into validated customer behavioral personas and transparent, hypothesis-driven marketing opportunities.
 
+🚀 Live Demo: https://customerlens-app.streamlit.app/
+
+### Project Links
+- **Live Streamlit App:** https://customerlens-app.streamlit.app/
+- **GitHub Repository:** https://github.com/DIVYANK6767/Customer_Lens
+
 ---
 
 ## Table of Contents
@@ -352,8 +358,10 @@ A production-oriented Power BI portfolio report resides in `powerbi/CustomerLens
 
 The interactive web application provides self-service behavioral exploration:
 
+- **Live Deployment:** https://customerlens-app.streamlit.app/
+
 ```bash
-# Launch the Streamlit application
+# Launch the Streamlit application locally
 streamlit run app/Home.py
 ```
 
